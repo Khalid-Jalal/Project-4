@@ -1,0 +1,17 @@
+BOARD = (J10);
+
+c = 10;
+
+ROOK = {Path true ATKMOVE UP 52 RIGHT 2, Direct false MOVE DOWN 30};
+
+
+Player2 = {ROOK, {A1, J5, B4, X5, J4},
+           ROOK, {A1, J5},
+           ROOK, {A1, J5},
+           ROOK, {A1, J5}};
+
+
+
+
+STARTGAME(Player2)
+
