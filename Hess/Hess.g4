@@ -9,15 +9,16 @@ line: statement;
 statement: (assignment) ';';
 
 // Board definition and game start rules
-defineBoard: 'BOARD' '=' '(' BOARDPOSITION ')' ';';
+defineBoard: 'BOARD(' BOARDPOSITION ')' ';';
 
-startGame: 'STARTGAME(' IDENTIFIER (',' IDENTIFIER)* ')';
+startGame: 'STARTGAME(' IDENTIFIER ',' IDENTIFIER ')';
 
 // Assignment rules
 assignment:
-	IDENTIFIER '=' '{' moveList '}'
-	| IDENTIFIER '=' player
-	| IDENTIFIER '=' expression;
+	IDENTIFIER '=' moveList //PIECE ASSIGNMENT
+	| IDENTIFIER '=' player //PLAYER ASSIGNMENT
+	| IDENTIFIER '=' expression //EXPRESSION ASSIGNMENT
+	| IDENTIFIER '=' place; //PLACE ASSIGNMENT
 
 // Expression rules
 expression: constant | IDENTIFIER;
@@ -26,7 +27,7 @@ expression: constant | IDENTIFIER;
 block: '{' line* '}';
 
 // Move-related rules [KINDA SOM ET ARRAY]
-moveList: move (',' move)*;
+moveList: '{' move (',' move)* '}';
 move: movetype collision attacktype direction moveExtra;
 moveExtra:
 	NATURAL_NUMBER
@@ -36,16 +37,17 @@ moveExtra:
 constant: NATURAL_NUMBER | STRING | BOOL | NULL;
 
 // Player and board position rules [KINDA SOM ET ARRAY]
-player: '{' place (',' place)* '}';
-place: IDENTIFIER ',' '{' boardpositionlist '}';
-boardpositionlist: BOARDPOSITION (',' BOARDPOSITION)*;
+player: '{' placeType (',' placeType)* '}';
+place: 'PLACE(' IDENTIFIER ',' boardpositionlist ')';
+placeType: place | | IDENTIFIER;
+boardpositionlist: '{' BOARDPOSITION (',' BOARDPOSITION)* '}';
 
 // Lexer rules for identifiers and literals
-BOARDPOSITION: LETTER [1-9][0-9]*;
+BOARDPOSITION: CAP_LETTER [1-9][0-9]*;
 IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
 NATURAL_NUMBER: [1-9][0-9]*;
 STRING: ('"' ~'"'* '"') | ('\'' ~'\''* '\'');
-LETTER: [a-zA-Z];
+CAP_LETTER: [A-Z];
 
 // Lexer rules for keywords
 collision: 'true' | 'false';

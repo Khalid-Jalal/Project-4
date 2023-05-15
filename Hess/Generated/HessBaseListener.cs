@@ -204,6 +204,18 @@ public partial class HessBaseListener : IHessListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitPlace([NotNull] HessParser.PlaceContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="HessParser.placeType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterPlaceType([NotNull] HessParser.PlaceTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="HessParser.placeType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitPlaceType([NotNull] HessParser.PlaceTypeContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="HessParser.boardpositionlist"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

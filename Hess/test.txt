@@ -1,17 +1,19 @@
-BOARD = (J10);
+BOARD(J13);
 
-c = 10;
+A = 10;
 
-ROOK = {Path true ATKMOVE UP 52 RIGHT 2, Direct false MOVE DOWN 30};
+ROOK = {Path true ATKMOVE UP 52 RIGHT 2, Direct false MOVE DOWN 23};
+PAWN = {Path true MOVE UP 3, Direct true MOVE DOWN 3, Direct false MOVE LEFT 3, Path false MOVE RIGHT 3};
+
+A = PLACE(PAWN, {F6, B2, F3});
+
+B = PLACE(ROOK, {D4, E5, E6});
+
+Spiller1 = {A, PLACE(ROOK, {H3, H8, J10, A11, B12})};
+           
 
 
-Player2 = {ROOK, {A1, J5, B4, X5, J4},
-           ROOK, {A1, J5},
-           ROOK, {A1, J5},
-           ROOK, {A1, J5}};
+Spiller2 = {PLACE(ROOK, {A3, B3, D4, E4})};
+          
 
-
-
-
-STARTGAME(Player2)
-
+STARTGAME(Spiller1, Spiller2)

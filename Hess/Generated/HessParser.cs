@@ -39,30 +39,31 @@ public partial class HessParser : Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, BOARDPOSITION=21, IDENTIFIER=22, NATURAL_NUMBER=23, 
-		STRING=24, LETTER=25, BOOL=26, NULL=27, WS=28;
+		STRING=24, CAP_LETTER=25, BOOL=26, NULL=27, WS=28;
 	public const int
 		RULE_program = 0, RULE_line = 1, RULE_statement = 2, RULE_defineBoard = 3, 
 		RULE_startGame = 4, RULE_assignment = 5, RULE_expression = 6, RULE_block = 7, 
 		RULE_moveList = 8, RULE_move = 9, RULE_moveExtra = 10, RULE_constant = 11, 
-		RULE_player = 12, RULE_place = 13, RULE_boardpositionlist = 14, RULE_collision = 15, 
-		RULE_attacktype = 16, RULE_direction = 17, RULE_movetype = 18;
+		RULE_player = 12, RULE_place = 13, RULE_placeType = 14, RULE_boardpositionlist = 15, 
+		RULE_collision = 16, RULE_attacktype = 17, RULE_direction = 18, RULE_movetype = 19;
 	public static readonly string[] ruleNames = {
 		"program", "line", "statement", "defineBoard", "startGame", "assignment", 
 		"expression", "block", "moveList", "move", "moveExtra", "constant", "player", 
-		"place", "boardpositionlist", "collision", "attacktype", "direction", 
-		"movetype"
+		"place", "placeType", "boardpositionlist", "collision", "attacktype", 
+		"direction", "movetype"
 	};
 
 	private static readonly string[] _LiteralNames = {
-		null, "';'", "'BOARD'", "'='", "'('", "')'", "'STARTGAME('", "','", "'{'", 
-		"'}'", "'true'", "'false'", "'ATTACK'", "'MOVE'", "'ATKMOVE'", "'UP'", 
+		null, "';'", "'BOARD('", "')'", "'STARTGAME('", "','", "'='", "'{'", "'}'", 
+		"'PLACE('", "'true'", "'false'", "'ATTACK'", "'MOVE'", "'ATKMOVE'", "'UP'", 
 		"'LEFT'", "'RIGHT'", "'DOWN'", "'Direct'", "'Path'", null, null, null, 
 		null, null, null, "'null'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, "BOARDPOSITION", 
-		"IDENTIFIER", "NATURAL_NUMBER", "STRING", "LETTER", "BOOL", "NULL", "WS"
+		"IDENTIFIER", "NATURAL_NUMBER", "STRING", "CAP_LETTER", "BOOL", "NULL", 
+		"WS"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -140,23 +141,23 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 38;
+			State = 40;
 			defineBoard();
-			State = 42;
+			State = 44;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==IDENTIFIER) {
 				{
 				{
-				State = 39;
+				State = 41;
 				line();
 				}
 				}
-				State = 44;
+				State = 46;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 45;
+			State = 47;
 			startGame();
 			}
 		}
@@ -205,7 +206,7 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 47;
+			State = 49;
 			statement();
 			}
 		}
@@ -255,10 +256,10 @@ public partial class HessParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			{
-			State = 49;
+			State = 51;
 			assignment();
 			}
-			State = 50;
+			State = 52;
 			Match(T__0);
 			}
 		}
@@ -305,16 +306,12 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 52;
-			Match(T__1);
-			State = 53;
-			Match(T__2);
 			State = 54;
-			Match(T__3);
+			Match(T__1);
 			State = 55;
 			Match(BOARDPOSITION);
 			State = 56;
-			Match(T__4);
+			Match(T__2);
 			State = 57;
 			Match(T__0);
 			}
@@ -362,32 +359,19 @@ public partial class HessParser : Parser {
 	public StartGameContext startGame() {
 		StartGameContext _localctx = new StartGameContext(Context, State);
 		EnterRule(_localctx, 8, RULE_startGame);
-		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 59;
-			Match(T__5);
+			Match(T__3);
 			State = 60;
 			Match(IDENTIFIER);
-			State = 65;
-			ErrorHandler.Sync(this);
-			_la = TokenStream.LA(1);
-			while (_la==T__6) {
-				{
-				{
-				State = 61;
-				Match(T__6);
-				State = 62;
-				Match(IDENTIFIER);
-				}
-				}
-				State = 67;
-				ErrorHandler.Sync(this);
-				_la = TokenStream.LA(1);
-			}
-			State = 68;
+			State = 61;
 			Match(T__4);
+			State = 62;
+			Match(IDENTIFIER);
+			State = 63;
+			Match(T__2);
 			}
 		}
 		catch (RecognitionException re) {
@@ -411,6 +395,9 @@ public partial class HessParser : Parser {
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public PlaceContext place() {
+			return GetRuleContext<PlaceContext>(0);
 		}
 		public AssignmentContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -440,44 +427,51 @@ public partial class HessParser : Parser {
 		AssignmentContext _localctx = new AssignmentContext(Context, State);
 		EnterRule(_localctx, 10, RULE_assignment);
 		try {
-			State = 82;
+			State = 77;
 			ErrorHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(TokenStream,2,Context) ) {
+			switch ( Interpreter.AdaptivePredict(TokenStream,1,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 70;
+				State = 65;
 				Match(IDENTIFIER);
-				State = 71;
-				Match(T__2);
-				State = 72;
-				Match(T__7);
-				State = 73;
+				State = 66;
+				Match(T__5);
+				State = 67;
 				moveList();
-				State = 74;
-				Match(T__8);
 				}
 				break;
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 76;
+				State = 68;
 				Match(IDENTIFIER);
-				State = 77;
-				Match(T__2);
-				State = 78;
+				State = 69;
+				Match(T__5);
+				State = 70;
 				player();
 				}
 				break;
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 79;
+				State = 71;
 				Match(IDENTIFIER);
-				State = 80;
-				Match(T__2);
-				State = 81;
+				State = 72;
+				Match(T__5);
+				State = 73;
 				expression();
+				}
+				break;
+			case 4:
+				EnterOuterAlt(_localctx, 4);
+				{
+				State = 74;
+				Match(IDENTIFIER);
+				State = 75;
+				Match(T__5);
+				State = 76;
+				place();
 				}
 				break;
 			}
@@ -526,7 +520,7 @@ public partial class HessParser : Parser {
 		ExpressionContext _localctx = new ExpressionContext(Context, State);
 		EnterRule(_localctx, 12, RULE_expression);
 		try {
-			State = 86;
+			State = 81;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case NATURAL_NUMBER:
@@ -535,14 +529,14 @@ public partial class HessParser : Parser {
 			case NULL:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 84;
+				State = 79;
 				constant();
 				}
 				break;
 			case IDENTIFIER:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 85;
+				State = 80;
 				Match(IDENTIFIER);
 				}
 				break;
@@ -599,24 +593,24 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 88;
-			Match(T__7);
-			State = 92;
+			State = 83;
+			Match(T__6);
+			State = 87;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==IDENTIFIER) {
 				{
 				{
-				State = 89;
+				State = 84;
 				line();
 				}
 				}
-				State = 94;
+				State = 89;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 95;
-			Match(T__8);
+			State = 90;
+			Match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -668,24 +662,28 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 97;
+			State = 92;
+			Match(T__6);
+			State = 93;
 			move();
-			State = 102;
+			State = 98;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			while (_la==T__6) {
+			while (_la==T__4) {
 				{
 				{
-				State = 98;
-				Match(T__6);
-				State = 99;
+				State = 94;
+				Match(T__4);
+				State = 95;
 				move();
 				}
 				}
-				State = 104;
+				State = 100;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
+			State = 101;
+			Match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -745,15 +743,15 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 105;
+			State = 103;
 			movetype();
-			State = 106;
+			State = 104;
 			collision();
-			State = 107;
+			State = 105;
 			attacktype();
-			State = 108;
+			State = 106;
 			direction();
-			State = 109;
+			State = 107;
 			moveExtra();
 			}
 		}
@@ -804,33 +802,33 @@ public partial class HessParser : Parser {
 		MoveExtraContext _localctx = new MoveExtraContext(Context, State);
 		EnterRule(_localctx, 20, RULE_moveExtra);
 		try {
-			State = 119;
+			State = 117;
 			ErrorHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(TokenStream,6,Context) ) {
+			switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 111;
+				State = 109;
 				Match(NATURAL_NUMBER);
 				}
 				break;
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 112;
+				State = 110;
 				Match(NATURAL_NUMBER);
-				State = 113;
+				State = 111;
 				direction();
-				State = 114;
+				State = 112;
 				Match(NATURAL_NUMBER);
 				}
 				break;
 			case 3:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 116;
+				State = 114;
 				direction();
-				State = 117;
+				State = 115;
 				Match(NATURAL_NUMBER);
 				}
 				break;
@@ -883,7 +881,7 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 121;
+			State = 119;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 226492416L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -906,11 +904,11 @@ public partial class HessParser : Parser {
 	}
 
 	public partial class PlayerContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public PlaceContext[] place() {
-			return GetRuleContexts<PlaceContext>();
+		[System.Diagnostics.DebuggerNonUserCode] public PlaceTypeContext[] placeType() {
+			return GetRuleContexts<PlaceTypeContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public PlaceContext place(int i) {
-			return GetRuleContext<PlaceContext>(i);
+		[System.Diagnostics.DebuggerNonUserCode] public PlaceTypeContext placeType(int i) {
+			return GetRuleContext<PlaceTypeContext>(i);
 		}
 		public PlayerContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -943,28 +941,28 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 123;
-			Match(T__7);
-			State = 124;
-			place();
-			State = 129;
+			State = 121;
+			Match(T__6);
+			State = 122;
+			placeType();
+			State = 127;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			while (_la==T__6) {
+			while (_la==T__4) {
 				{
 				{
-				State = 125;
-				Match(T__6);
-				State = 126;
-				place();
+				State = 123;
+				Match(T__4);
+				State = 124;
+				placeType();
 				}
 				}
-				State = 131;
+				State = 129;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 132;
-			Match(T__8);
+			State = 130;
+			Match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1013,16 +1011,87 @@ public partial class HessParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 134;
-			Match(IDENTIFIER);
-			State = 135;
-			Match(T__6);
-			State = 136;
-			Match(T__7);
-			State = 137;
-			boardpositionlist();
-			State = 138;
+			State = 132;
 			Match(T__8);
+			State = 133;
+			Match(IDENTIFIER);
+			State = 134;
+			Match(T__4);
+			State = 135;
+			boardpositionlist();
+			State = 136;
+			Match(T__2);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class PlaceTypeContext : ParserRuleContext {
+		[System.Diagnostics.DebuggerNonUserCode] public PlaceContext place() {
+			return GetRuleContext<PlaceContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(HessParser.IDENTIFIER, 0); }
+		public PlaceTypeContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_placeType; } }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			IHessListener typedListener = listener as IHessListener;
+			if (typedListener != null) typedListener.EnterPlaceType(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			IHessListener typedListener = listener as IHessListener;
+			if (typedListener != null) typedListener.ExitPlaceType(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IHessVisitor<TResult> typedVisitor = visitor as IHessVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPlaceType(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public PlaceTypeContext placeType() {
+		PlaceTypeContext _localctx = new PlaceTypeContext(Context, State);
+		EnterRule(_localctx, 28, RULE_placeType);
+		try {
+			State = 141;
+			ErrorHandler.Sync(this);
+			switch (TokenStream.LA(1)) {
+			case T__8:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 138;
+				place();
+				}
+				break;
+			case T__4:
+			case T__7:
+				EnterOuterAlt(_localctx, 2);
+				{
+				}
+				break;
+			case IDENTIFIER:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 140;
+				Match(IDENTIFIER);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1067,29 +1136,33 @@ public partial class HessParser : Parser {
 	[RuleVersion(0)]
 	public BoardpositionlistContext boardpositionlist() {
 		BoardpositionlistContext _localctx = new BoardpositionlistContext(Context, State);
-		EnterRule(_localctx, 28, RULE_boardpositionlist);
+		EnterRule(_localctx, 30, RULE_boardpositionlist);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 140;
+			State = 143;
+			Match(T__6);
+			State = 144;
 			Match(BOARDPOSITION);
-			State = 145;
+			State = 149;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
-			while (_la==T__6) {
+			while (_la==T__4) {
 				{
 				{
-				State = 141;
-				Match(T__6);
-				State = 142;
+				State = 145;
+				Match(T__4);
+				State = 146;
 				Match(BOARDPOSITION);
 				}
 				}
-				State = 147;
+				State = 151;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
+			State = 152;
+			Match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1130,12 +1203,12 @@ public partial class HessParser : Parser {
 	[RuleVersion(0)]
 	public CollisionContext collision() {
 		CollisionContext _localctx = new CollisionContext(Context, State);
-		EnterRule(_localctx, 30, RULE_collision);
+		EnterRule(_localctx, 32, RULE_collision);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 148;
+			State = 154;
 			_la = TokenStream.LA(1);
 			if ( !(_la==T__9 || _la==T__10) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1184,12 +1257,12 @@ public partial class HessParser : Parser {
 	[RuleVersion(0)]
 	public AttacktypeContext attacktype() {
 		AttacktypeContext _localctx = new AttacktypeContext(Context, State);
-		EnterRule(_localctx, 32, RULE_attacktype);
+		EnterRule(_localctx, 34, RULE_attacktype);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 150;
+			State = 156;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 28672L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1238,12 +1311,12 @@ public partial class HessParser : Parser {
 	[RuleVersion(0)]
 	public DirectionContext direction() {
 		DirectionContext _localctx = new DirectionContext(Context, State);
-		EnterRule(_localctx, 34, RULE_direction);
+		EnterRule(_localctx, 36, RULE_direction);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 152;
+			State = 158;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 491520L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1292,12 +1365,12 @@ public partial class HessParser : Parser {
 	[RuleVersion(0)]
 	public MovetypeContext movetype() {
 		MovetypeContext _localctx = new MovetypeContext(Context, State);
-		EnterRule(_localctx, 36, RULE_movetype);
+		EnterRule(_localctx, 38, RULE_movetype);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 154;
+			State = 160;
 			_la = TokenStream.LA(1);
 			if ( !(_la==T__18 || _la==T__19) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1320,51 +1393,53 @@ public partial class HessParser : Parser {
 	}
 
 	private static int[] _serializedATN = {
-		4,1,28,157,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
+		4,1,28,163,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
 		7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,
-		2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,1,0,1,0,5,0,41,8,0,10,0,12,0,44,
-		9,0,1,0,1,0,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,4,1,4,1,
-		4,1,4,5,4,64,8,4,10,4,12,4,67,9,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,5,1,5,
-		1,5,1,5,1,5,1,5,1,5,3,5,83,8,5,1,6,1,6,3,6,87,8,6,1,7,1,7,5,7,91,8,7,10,
-		7,12,7,94,9,7,1,7,1,7,1,8,1,8,1,8,5,8,101,8,8,10,8,12,8,104,9,8,1,9,1,
-		9,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,120,8,10,
-		1,11,1,11,1,12,1,12,1,12,1,12,5,12,128,8,12,10,12,12,12,131,9,12,1,12,
-		1,12,1,13,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,5,14,144,8,14,10,14,
-		12,14,147,9,14,1,15,1,15,1,16,1,16,1,17,1,17,1,18,1,18,1,18,0,0,19,0,2,
-		4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,0,5,2,0,23,24,26,27,1,
-		0,10,11,1,0,12,14,1,0,15,18,1,0,19,20,148,0,38,1,0,0,0,2,47,1,0,0,0,4,
-		49,1,0,0,0,6,52,1,0,0,0,8,59,1,0,0,0,10,82,1,0,0,0,12,86,1,0,0,0,14,88,
-		1,0,0,0,16,97,1,0,0,0,18,105,1,0,0,0,20,119,1,0,0,0,22,121,1,0,0,0,24,
-		123,1,0,0,0,26,134,1,0,0,0,28,140,1,0,0,0,30,148,1,0,0,0,32,150,1,0,0,
-		0,34,152,1,0,0,0,36,154,1,0,0,0,38,42,3,6,3,0,39,41,3,2,1,0,40,39,1,0,
-		0,0,41,44,1,0,0,0,42,40,1,0,0,0,42,43,1,0,0,0,43,45,1,0,0,0,44,42,1,0,
-		0,0,45,46,3,8,4,0,46,1,1,0,0,0,47,48,3,4,2,0,48,3,1,0,0,0,49,50,3,10,5,
-		0,50,51,5,1,0,0,51,5,1,0,0,0,52,53,5,2,0,0,53,54,5,3,0,0,54,55,5,4,0,0,
-		55,56,5,21,0,0,56,57,5,5,0,0,57,58,5,1,0,0,58,7,1,0,0,0,59,60,5,6,0,0,
-		60,65,5,22,0,0,61,62,5,7,0,0,62,64,5,22,0,0,63,61,1,0,0,0,64,67,1,0,0,
-		0,65,63,1,0,0,0,65,66,1,0,0,0,66,68,1,0,0,0,67,65,1,0,0,0,68,69,5,5,0,
-		0,69,9,1,0,0,0,70,71,5,22,0,0,71,72,5,3,0,0,72,73,5,8,0,0,73,74,3,16,8,
-		0,74,75,5,9,0,0,75,83,1,0,0,0,76,77,5,22,0,0,77,78,5,3,0,0,78,83,3,24,
-		12,0,79,80,5,22,0,0,80,81,5,3,0,0,81,83,3,12,6,0,82,70,1,0,0,0,82,76,1,
-		0,0,0,82,79,1,0,0,0,83,11,1,0,0,0,84,87,3,22,11,0,85,87,5,22,0,0,86,84,
-		1,0,0,0,86,85,1,0,0,0,87,13,1,0,0,0,88,92,5,8,0,0,89,91,3,2,1,0,90,89,
-		1,0,0,0,91,94,1,0,0,0,92,90,1,0,0,0,92,93,1,0,0,0,93,95,1,0,0,0,94,92,
-		1,0,0,0,95,96,5,9,0,0,96,15,1,0,0,0,97,102,3,18,9,0,98,99,5,7,0,0,99,101,
-		3,18,9,0,100,98,1,0,0,0,101,104,1,0,0,0,102,100,1,0,0,0,102,103,1,0,0,
-		0,103,17,1,0,0,0,104,102,1,0,0,0,105,106,3,36,18,0,106,107,3,30,15,0,107,
-		108,3,32,16,0,108,109,3,34,17,0,109,110,3,20,10,0,110,19,1,0,0,0,111,120,
-		5,23,0,0,112,113,5,23,0,0,113,114,3,34,17,0,114,115,5,23,0,0,115,120,1,
-		0,0,0,116,117,3,34,17,0,117,118,5,23,0,0,118,120,1,0,0,0,119,111,1,0,0,
-		0,119,112,1,0,0,0,119,116,1,0,0,0,120,21,1,0,0,0,121,122,7,0,0,0,122,23,
-		1,0,0,0,123,124,5,8,0,0,124,129,3,26,13,0,125,126,5,7,0,0,126,128,3,26,
-		13,0,127,125,1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,0,129,130,1,0,0,0,130,
-		132,1,0,0,0,131,129,1,0,0,0,132,133,5,9,0,0,133,25,1,0,0,0,134,135,5,22,
-		0,0,135,136,5,7,0,0,136,137,5,8,0,0,137,138,3,28,14,0,138,139,5,9,0,0,
-		139,27,1,0,0,0,140,145,5,21,0,0,141,142,5,7,0,0,142,144,5,21,0,0,143,141,
-		1,0,0,0,144,147,1,0,0,0,145,143,1,0,0,0,145,146,1,0,0,0,146,29,1,0,0,0,
-		147,145,1,0,0,0,148,149,7,1,0,0,149,31,1,0,0,0,150,151,7,2,0,0,151,33,
-		1,0,0,0,152,153,7,3,0,0,153,35,1,0,0,0,154,155,7,4,0,0,155,37,1,0,0,0,
-		9,42,65,82,86,92,102,119,129,145
+		2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,1,0,1,0,5,0,43,8,0,10,
+		0,12,0,46,9,0,1,0,1,0,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,1,3,1,3,1,4,1,4,
+		1,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,1,5,3,5,78,
+		8,5,1,6,1,6,3,6,82,8,6,1,7,1,7,5,7,86,8,7,10,7,12,7,89,9,7,1,7,1,7,1,8,
+		1,8,1,8,1,8,5,8,97,8,8,10,8,12,8,100,9,8,1,8,1,8,1,9,1,9,1,9,1,9,1,9,1,
+		9,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,118,8,10,1,11,1,11,1,12,
+		1,12,1,12,1,12,5,12,126,8,12,10,12,12,12,129,9,12,1,12,1,12,1,13,1,13,
+		1,13,1,13,1,13,1,13,1,14,1,14,1,14,3,14,142,8,14,1,15,1,15,1,15,1,15,5,
+		15,148,8,15,10,15,12,15,151,9,15,1,15,1,15,1,16,1,16,1,17,1,17,1,18,1,
+		18,1,19,1,19,1,19,0,0,20,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,
+		34,36,38,0,5,2,0,23,24,26,27,1,0,10,11,1,0,12,14,1,0,15,18,1,0,19,20,155,
+		0,40,1,0,0,0,2,49,1,0,0,0,4,51,1,0,0,0,6,54,1,0,0,0,8,59,1,0,0,0,10,77,
+		1,0,0,0,12,81,1,0,0,0,14,83,1,0,0,0,16,92,1,0,0,0,18,103,1,0,0,0,20,117,
+		1,0,0,0,22,119,1,0,0,0,24,121,1,0,0,0,26,132,1,0,0,0,28,141,1,0,0,0,30,
+		143,1,0,0,0,32,154,1,0,0,0,34,156,1,0,0,0,36,158,1,0,0,0,38,160,1,0,0,
+		0,40,44,3,6,3,0,41,43,3,2,1,0,42,41,1,0,0,0,43,46,1,0,0,0,44,42,1,0,0,
+		0,44,45,1,0,0,0,45,47,1,0,0,0,46,44,1,0,0,0,47,48,3,8,4,0,48,1,1,0,0,0,
+		49,50,3,4,2,0,50,3,1,0,0,0,51,52,3,10,5,0,52,53,5,1,0,0,53,5,1,0,0,0,54,
+		55,5,2,0,0,55,56,5,21,0,0,56,57,5,3,0,0,57,58,5,1,0,0,58,7,1,0,0,0,59,
+		60,5,4,0,0,60,61,5,22,0,0,61,62,5,5,0,0,62,63,5,22,0,0,63,64,5,3,0,0,64,
+		9,1,0,0,0,65,66,5,22,0,0,66,67,5,6,0,0,67,78,3,16,8,0,68,69,5,22,0,0,69,
+		70,5,6,0,0,70,78,3,24,12,0,71,72,5,22,0,0,72,73,5,6,0,0,73,78,3,12,6,0,
+		74,75,5,22,0,0,75,76,5,6,0,0,76,78,3,26,13,0,77,65,1,0,0,0,77,68,1,0,0,
+		0,77,71,1,0,0,0,77,74,1,0,0,0,78,11,1,0,0,0,79,82,3,22,11,0,80,82,5,22,
+		0,0,81,79,1,0,0,0,81,80,1,0,0,0,82,13,1,0,0,0,83,87,5,7,0,0,84,86,3,2,
+		1,0,85,84,1,0,0,0,86,89,1,0,0,0,87,85,1,0,0,0,87,88,1,0,0,0,88,90,1,0,
+		0,0,89,87,1,0,0,0,90,91,5,8,0,0,91,15,1,0,0,0,92,93,5,7,0,0,93,98,3,18,
+		9,0,94,95,5,5,0,0,95,97,3,18,9,0,96,94,1,0,0,0,97,100,1,0,0,0,98,96,1,
+		0,0,0,98,99,1,0,0,0,99,101,1,0,0,0,100,98,1,0,0,0,101,102,5,8,0,0,102,
+		17,1,0,0,0,103,104,3,38,19,0,104,105,3,32,16,0,105,106,3,34,17,0,106,107,
+		3,36,18,0,107,108,3,20,10,0,108,19,1,0,0,0,109,118,5,23,0,0,110,111,5,
+		23,0,0,111,112,3,36,18,0,112,113,5,23,0,0,113,118,1,0,0,0,114,115,3,36,
+		18,0,115,116,5,23,0,0,116,118,1,0,0,0,117,109,1,0,0,0,117,110,1,0,0,0,
+		117,114,1,0,0,0,118,21,1,0,0,0,119,120,7,0,0,0,120,23,1,0,0,0,121,122,
+		5,7,0,0,122,127,3,28,14,0,123,124,5,5,0,0,124,126,3,28,14,0,125,123,1,
+		0,0,0,126,129,1,0,0,0,127,125,1,0,0,0,127,128,1,0,0,0,128,130,1,0,0,0,
+		129,127,1,0,0,0,130,131,5,8,0,0,131,25,1,0,0,0,132,133,5,9,0,0,133,134,
+		5,22,0,0,134,135,5,5,0,0,135,136,3,30,15,0,136,137,5,3,0,0,137,27,1,0,
+		0,0,138,142,3,26,13,0,139,142,1,0,0,0,140,142,5,22,0,0,141,138,1,0,0,0,
+		141,139,1,0,0,0,141,140,1,0,0,0,142,29,1,0,0,0,143,144,5,7,0,0,144,149,
+		5,21,0,0,145,146,5,5,0,0,146,148,5,21,0,0,147,145,1,0,0,0,148,151,1,0,
+		0,0,149,147,1,0,0,0,149,150,1,0,0,0,150,152,1,0,0,0,151,149,1,0,0,0,152,
+		153,5,8,0,0,153,31,1,0,0,0,154,155,7,1,0,0,155,33,1,0,0,0,156,157,7,2,
+		0,0,157,35,1,0,0,0,158,159,7,3,0,0,159,37,1,0,0,0,160,161,7,4,0,0,161,
+		39,1,0,0,0,9,44,77,81,87,98,117,127,141,149
 	};
 
 	public static readonly ATN _ATN =

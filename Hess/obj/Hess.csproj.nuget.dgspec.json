@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\10hi\\Desktop\\Hess\\Hess.csproj": {}
+    "C:\\Users\\Emil\\vscode\\Hess\\Hess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\10hi\\Desktop\\Hess\\Hess.csproj": {
+    "C:\\Users\\Emil\\vscode\\Hess\\Hess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\10hi\\Desktop\\Hess\\Hess.csproj",
+        "projectUniqueName": "C:\\Users\\Emil\\vscode\\Hess\\Hess.csproj",
         "projectName": "Hess",
-        "projectPath": "C:\\Users\\10hi\\Desktop\\Hess\\Hess.csproj",
-        "packagesPath": "C:\\Users\\10hi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\10hi\\Desktop\\Hess\\obj\\",
+        "projectPath": "C:\\Users\\Emil\\vscode\\Hess\\Hess.csproj",
+        "packagesPath": "C:\\Users\\Emil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Emil\\vscode\\Hess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\10hi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Emil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

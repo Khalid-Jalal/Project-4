@@ -171,6 +171,16 @@ public interface IHessListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitPlace([NotNull] HessParser.PlaceContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="HessParser.placeType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPlaceType([NotNull] HessParser.PlaceTypeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="HessParser.placeType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPlaceType([NotNull] HessParser.PlaceTypeContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="HessParser.boardpositionlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

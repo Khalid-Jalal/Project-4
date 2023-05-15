@@ -116,6 +116,12 @@ public interface IHessVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitPlace([NotNull] HessParser.PlaceContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="HessParser.placeType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPlaceType([NotNull] HessParser.PlaceTypeContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="HessParser.boardpositionlist"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
